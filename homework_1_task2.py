@@ -3,4 +3,5 @@ surname = "Иванов"
 age = 33
 height = 182
 birth_year = 2021 - age
-print (name, surname,  birth_year, "ростом", height, "см")
+bio = name + " " + surname + " " + str(birth_year) + " ростом " + str(height) + " " + "см"
+print(bio)
