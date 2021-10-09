@@ -14,16 +14,16 @@ templates = (
     "{name} {surname} закончил школу",
     "{name} {surname} скоро пойдет в школу",
 )
-finaltext1 = templates[1].format(name = users[0]['name'], surname = users[0]['surname'])
+finaltext1 = templates[users[0]['age'] < 7].format(name = users[0]['name'], surname = users[0]['surname'])
 print(finaltext1)
 
-finaltext2 = templates[0].format(name = users[1]['name'], surname = users[1]['surname'])
+finaltext2 = templates[users[1]['age'] < 7].format(name = users[1]['name'], surname = users[1]['surname'])
 print(finaltext2)
 
 
 
 
-
+# solution
 result = templates[users[0]["age"] < 7].format(
     name=users[0]["name"],
     surname=users[0]["surname"],
