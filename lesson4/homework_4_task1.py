@@ -5,17 +5,10 @@ some_builds = [
     [1, 1, 1, 1]
 ]
 
-n = len(some_builds)     # числа этажей
-m = len(some_builds[0])  # число зданий
-
 heights = []
 
-
-for building_number in range(m):
-    height = 0
-    for floor_number in range(n):
-        height += some_builds[floor_number][building_number]
-    heights.append(height)
+for elem in zip(*some_builds):
+    heights.append(sum(elem))
 
 max_height = max(heights)
 
