@@ -23,14 +23,16 @@ def morse_encode(str):
 str = input('Введите строку латинскими буквами: ')
 print(morse_encode(str))
 
-#
-# def morse_decode(str):
-#     temp_morse_str = str.split()
-#     for (key, value) in MORSE.items():
-#         temp_morse_str = temp_cypher.replace(key, value)
-#     return temp_cypher.capitalize()
-#
-#
-# str = input('Введите шифр: ')
-# print(morse_decode(str))
+
+def morse_decode(str):
+     temp_morse_str = str.split(" ")
+     result = []
+     for m_char in temp_morse_str:
+         decode_char = MORSE[m_char] if m_char else " "
+         result.append(decode_char)
+     return "".join(result).capitalize()
+
+
+str = input('Введите шифр: ')
+print(morse_decode(str))
 
