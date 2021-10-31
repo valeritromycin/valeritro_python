@@ -35,3 +35,4 @@ result = templates[users[1]["age"] < 7].format(
     surname=users[1]["surname"],
 )
 print(result)
+
