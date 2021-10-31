@@ -46,3 +46,6 @@ def test_matrix():
         assert tic_tac_toe.matrix_match(test[0]) is test[1], test[0]
 
 test_matrix()
+
+
+# I did something bad
