@@ -1,5 +1,5 @@
-# from tic_tac_toe import matrix_match
-import tic_tac_toe
+# from TicTacToe import matrix_match
+import TicTacToe
 
 
 def test_matrix():
