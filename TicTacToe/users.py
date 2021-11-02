@@ -1,6 +1,6 @@
 import random
 
-from TicTacToe.constants import USER_TEMPLATE, COMP_NAMES, SYMBOLS
+from constants import USER_TEMPLATE, COMP_NAMES, SYMBOLS
 
 
 def create_user(symbol) -> dict:

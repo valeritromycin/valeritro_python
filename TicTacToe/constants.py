@@ -8,7 +8,7 @@ COMP_NAMES = [
 ]
 
 USER_TEMPLATE = (
-    ("name", lambda *args, **kwargs: input("ВВЕДИТЕ ВАШЕ ИМЯ")),
+    ("name", lambda *args, **kwargs: input("ВВЕДИТЕ ВАШЕ ИМЯ", "shurila")),
     ("symbol", lambda symbol, *args, **kwargs: symbol),
     ("steps", lambda *args, **kwargs: list()),
     ("all_steps", lambda *args, **kwargs: set()),

@@ -1,14 +1,27 @@
+import sys
 from itertools import cycle
 
-from TicTacToe.board import get_board, board_match, print_board
-from TicTacToe.steps import user_step
-from TicTacToe.users import ask_mode, create_users
+from board import get_board, board_match, print_board
+from steps import user_step
+from users import ask_mode, create_users, MODES
 
 
 def game_init() -> dict:
     print("Добро пожаловать в Игру Крестики Нолики")
+    mode = None
+    try:
+        argv_mode = sys.argv[2]
+        if argv_mode.upper() in MODES:
+            mode = argv_mode
+    except IndexError:
+        pass
+    if not mode:
+        mode = ask_mode()
+
+    name = sys.argv[3]
+
     return {
-        "users": create_users(ask_mode()),
+        "users": create_users(mode),
         "board": get_board(3),
     }
 
