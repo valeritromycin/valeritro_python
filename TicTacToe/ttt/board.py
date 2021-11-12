@@ -1,11 +1,8 @@
-# TODO: создать доску
-# TODO:
-
 def get_board(size):
     return [[0 for _ in range(size)] for _ in range(size)]
 
 
-def matrix_match(board):
+def board_match(board):
     def chek_line(line):
         line_set = set(line)
         if 0 not in line_set and len(line_set) == 1:
