@@ -1,7 +1,7 @@
 import sys
 from itertools import cycle
 
-from .board import get_board, board_match, print_board
+from .myboard import get_board, board_match, print_board
 from .game_logger import write_init, get_game_num, write_step, write_end_game
 from .steps import user_step
 from .users import ask_mode, create_users, MODES
