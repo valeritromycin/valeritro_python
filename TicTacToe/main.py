@@ -1,4 +1,4 @@
-from ttt.board import get_board
+from ttt.myboard import get_board
 from ttt.game import game_init, game_cycle, game_end
 
 
