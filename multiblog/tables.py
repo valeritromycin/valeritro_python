@@ -7,7 +7,7 @@ from sqlalchemy import (
     ForeignKey,
     DateTime,
 )
-
+from sqlalchemy.orm import relationship, backref
 
 Base = declarative_base()
 
@@ -24,6 +24,8 @@ class Author(Base):
     author_name = Column(String(144), unique=False)
     author_surname = Column(String(144), unique=False)
     blog_id = Column(Integer, ForeignKey('blogs.id'), nullable=True)
+
+    blog = relationship("Blog", backref=backref("authors", uselist=False))
 
 
 class Publication(Base):

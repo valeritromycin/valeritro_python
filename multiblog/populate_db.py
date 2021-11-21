@@ -1,47 +1,48 @@
 import random
+
 from tables import Author, Blog
 
 
 NAMES = [
-    'Raeve',
-    'Frey',
-    'Tyra',
-    'Melori',
-    'Rayna',
-    'Del',
-    'Kestria',
-    'Raia',
-    'Echo',
-    'Georgios'
+    'Harry',
+    'Hermione',
+    'Ron',
+    'Luna',
+    'Jinny',
+    'Nevill',
+    'Severus',
+    'Sirius',
+    'James',
+    'Draco'
 ]
 
 SURNAMES = [
-    'Pollo',
-    'Zalie',
-    'Lakkena',
-    'Famir',
-    'Carwel',
+    'Ardonia',
+    'Vasko',
+    'Jordinjo',
+    'Partiallo',
+    'Nukirt',
     'Pollo',
     'Zalie',
     'Lakkena',
     'Famir',
     'Carwel',
 ]
+
+
 
 size = 100
 
 
-def generate_fullname():
-    add_list = []
+def generate_fullnames():
+    author_list = []
+    blog_list = []
     for i in range(size):
         name = random.choice(NAMES)
         surname = random.choice(SURNAMES)
         blog_name = f'{name} {surname}'
         blog = Blog(blog_name=blog_name)
         author = Author(author_name=name, author_surname=surname, blog_id=blog.id)
-        add_list.append(blog)
-        add_list.append(author)
-    return add_list
-
-
-generate_fullname()
+        blog_list.append(blog)
+        author_list.append(author)
+    return zip(author_list, blog_list)
