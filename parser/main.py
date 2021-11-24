@@ -1,5 +1,3 @@
-import db
-import pathlib
 import requests
 from urllib.parse import urljoin, urlparse
 import re
@@ -10,7 +8,10 @@ from sqlalchemy import (
     String,
     create_engine,
 )
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import sessionmaker
+
+
+Base = declarative_base()
 
 
 class DataBase:
@@ -21,8 +22,7 @@ class DataBase:
         self.maker = sessionmaker(bind=engine)
 
 
-Base = declarative_base()
-
+db = DataBase("sqlite:///db.magnit")
 
 url = "https://magnit.ru/promo/"
 pattern = re.compile(r"href=\"(/promo/\S+)\"")
@@ -52,7 +52,9 @@ for link in re.findall(pattern, response.text):
             goods_link = get_page(url).text
             goods_name_raw = re.findall(product_pattern, goods_link)[0]
             goods_name = goods_name_raw[16:-6]
-            goods = Goods(goods_link=goods_link, goods_name=goods_name)
+            goods = Goods(goods_link=url, goods_name=goods_name)
+            db_url = "sqlite:///db.magnit"
+            db = DataBase(db_url)
             session = db.maker()
             session.add(goods)
             session.commit()
@@ -60,9 +62,3 @@ for link in re.findall(pattern, response.text):
 
         else:
             pass
-
-
-if __name__ == '__main__':
-    db_url = "sqlite:///db.magnit"
-    db = DataBase(db_url)
-
