@@ -1,30 +1,68 @@
+import db
+import pathlib
 import requests
 from urllib.parse import urljoin, urlparse
 import re
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    create_engine,
+)
+from sqlalchemy.orm import Session, sessionmaker
 
 
+class DataBase:
+
+    def __init__(self, db_url):
+        engine = create_engine(db_url)
+        Base.metadata.create_all(bind=engine)
+        self.maker = sessionmaker(bind=engine)
+
+
+Base = declarative_base()
+
+
+url = "https://magnit.ru/promo/"
 pattern = re.compile(r"href=\"(/promo/\S+)\"")
-
 product_pattern = re.compile(r"\"action__title\">.*</div>")
+
+
+class Goods(Base):
+    __tablename__ = 'goods'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    goods_link = Column(String(256), unique=True)
+    goods_name = Column(String(256), unique=False)
 
 
 def get_page(url):
     return requests.get(url)
 
 
-url = "https://magnit.ru/promo/"
 response = get_page(url)
-
 products = set()
+
+
 for link in re.findall(pattern, response.text):
     base = urlparse(response.url)
     url = urljoin(response.url, link)
     if base.netloc == urlparse(url).netloc:
         if url not in products:
-            product_page = get_page(url).text
+            goods_link = get_page(url).text
+            goods_name_raw = re.findall(product_pattern, goods_link)[0]
+            goods_name = goods_name_raw[16:-6]
+            goods = Goods(goods_link=goods_link, goods_name=goods_name)
+            session = db.maker()
+            session.add(goods)
+            session.commit()
+            session.close()
 
-            product_name_raw = re.findall(product_pattern, product_page)[0]
-            product_name = product_name_raw[16:-6]
-            # TODO product = Product(url=url, product_name=product_name)
-            # TODO session.add(product)
-            # TODO session.commit()
+        else:
+            pass
+
+
+if __name__ == '__main__':
+    db_url = "sqlite:///db.magnit"
+    db = DataBase(db_url)
+
