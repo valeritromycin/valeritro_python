@@ -1,5 +1,4 @@
 import db
-import pathlib
 import requests
 from urllib.parse import urljoin, urlparse
 import re
