@@ -52,7 +52,7 @@ for link in re.findall(pattern, response.text):
             goods_link = get_page(url).text
             goods_name_raw = re.findall(product_pattern, goods_link)[0]
             goods_name = goods_name_raw[16:-6]
-            goods = Goods(goods_link=goods_link, goods_name=goods_name)
+            goods = Goods(goods_link=url, goods_name=goods_name)
             db_url = "sqlite:///db.magnit"
             db = DataBase(db_url)
             session = db.maker()
